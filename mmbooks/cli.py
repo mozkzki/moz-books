@@ -18,9 +18,9 @@ def main():
     # parser.add_argument("arg2", help="foooo")
 
     # オプション引数（指定しなくても良い引数）を追加
-    parser.add_argument("-t", "--title", help="検索する本のタイトル", default="")
-    parser.add_argument("-a", "--author", help="検索する本の著者名", default="")
-    parser.add_argument("-i", "--isbn", help="検索する本のISBN", default="")
+    parser.add_argument("-t", "--title", help="検索する本のタイトル")
+    parser.add_argument("-a", "--author", help="検索する本の著者名")
+    parser.add_argument("-i", "--isbn", help="検索する本のISBN")
     parser.add_argument(
         "-s",
         "--service",

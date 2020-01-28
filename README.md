@@ -1,41 +1,43 @@
-# mmimage
+# mmbooks
 
 ## 必要な環境変数
 
 ```(sh)
-gyazo_access_token=<please specify gyazo access toke>
+calil_app_key=<please specify calil application key>
+rakuten_app_id=<please specify rakuten application id>
 ```
 
 ## インストール
 
 ```(sh)
-pip install git+https://github.com/yukkun007/mmimage
+pip install git+https://github.com/yukkun007/mmbooks
 ```
 
 ## アップグレード
 
 ```(sh)
-pip install --upgrade git+https://github.com/yukkun007/mmimage
+pip install --upgrade git+https://github.com/yukkun007/mmbooks
 ```
 
 ## 使い方 (モジュールを利用)
 
 ```(sh)
 python
->>> import mmimage
->>> mmimage.hello()
+>>> import mmbooks
+>>> books = mmbooks.search(title="test")
+>>> print(books)
 ```
 
 ## 使い方 (コマンドラインアプリを実行)
 
 ```(sh)
-mmimage
+mmbooks
 ```
 
 ## アンインストール
 
 ```(sh)
-pip uninstall mmimage
+pip uninstall mmbooks
 ```
 
 ## 開発フロー
@@ -57,7 +59,7 @@ pip uninstall mmimage
         ```
 
 1. `pip install pipenv`
-1. `git clone git@github.com:yukkun007/mmimage.git`
+1. `git clone git@github.com:yukkun007/mmbooks.git`
 1. `pipenv install --dev`
 
 ### install package
@@ -84,14 +86,15 @@ pip install -e .
 
 ```(sh)
 python
->>> import mmimage
->>> mmimage.hello()
+>>> import mmbooks
+>>> books = mmbooks.search(title="test")
+>>> print(books)
 ```
 
 ### コマンドラインアプリを実行
 
 ```(sh)
-pipenv run start (もしくはmmimage)
+pipenv run start (もしくはmmbooks)
 ```
 
 ### unit test
@@ -114,7 +117,7 @@ pipenv run doc
 
 ### ソースコード配布物の作成
 
-dist/ 以下にmmimage-0.0.1.tar.gzが生成される。
+dist/ 以下にmmbooks-0.0.1.tar.gzが生成される。
 
 ```(sh)
 python setup.py sdist
@@ -123,12 +126,12 @@ python setup.py sdist
 ### ソースコード配布物からpipでインストール
 
 ```(sh)
-pip install mmimage-0.0.1-tar.gz
+pip install mmbooks-0.0.1-tar.gz
 ```
 
 ### ビルド済み配布物(wheel形式)の作成
 
-dist/ 以下にmmimage-0.0.1-py3-none-any.whlが生成される。
+dist/ 以下にmmbooks-0.0.1-py3-none-any.whlが生成される。
 
 ```(sh)
 python setup.py bdist_wheel (wheelパッケージが必要)
@@ -137,7 +140,7 @@ python setup.py bdist_wheel (wheelパッケージが必要)
 ### ビルド済み配布物(wheel形式)からpipでインストール
 
 ```(sh)
-pip install mmimage-0.0.1-py3-none-any.whl
+pip install mmbooks-0.0.1-py3-none-any.whl
 ```
 
 ## 参考
