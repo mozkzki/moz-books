@@ -41,6 +41,11 @@ class Google(Service):
                 query_author = "inauthor:" + author
                 query_string += "+" + query_author
 
-        param: Dict = {"q": query_string}
+        param: Dict = {
+            "q": query_string,
+            "maxResults": str(40),
+            "printType": "books",
+            "langRestrict": "ja",
+        }
 
         return param

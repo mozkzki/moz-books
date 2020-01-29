@@ -13,22 +13,22 @@ class GoogleBook(Book):
             self.author = volume_info.get("authors", "")[0]
         except Exception as e:
             self.author = ""
-            print(e)
+            print("failed to get author. error={}".format(e))
         # TODO: type==OTHERの場合は、identifierが1つしか無いため対処必要
         try:
             self.isbn = volume_info.get("industryIdentifiers", "")[1].get("identifier", "")
             self.isbn10 = volume_info.get("industryIdentifiers", "")[0].get("identifier", "")
         except Exception as e:
+            print("failed to get isbn13. error={}".format(e))
             # それでも無い場合あり
             try:
                 self.isbn = volume_info.get("industryIdentifiers", "")[0].get("identifier", "")
             except Exception as inner_error:
-                print(inner_error)
+                print("failed to get isbn10. error={}".format(inner_error))
                 self.isbn = ""
-            print(e)
         self.description = volume_info.get("description", "")
         self.page_count = volume_info.get("pageCount", "")
-        self.thumbnail_url = volume_info.get("imageLinks", "").get("thumbnail", "")
+        self.thumbnail_url = volume_info.get("imageLinks", {"thumbnail": ""}).get("thumbnail", "")
         self.published_date = volume_info.get("publishedDate", "")
         # self.price = response_json.get("itemPrice", "")
         # print(self)

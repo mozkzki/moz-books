@@ -44,19 +44,19 @@ pip uninstall mmbooks
 
 ### 環境構築
 
-1. 環境変数追加 (projectディレクトリに仮想環境作成)
+1. 環境変数追加 (project ディレクトリに仮想環境作成)
 
-    - Linux
+   - Linux
 
-        ```(sh)
-        export PIPENV_VENV_IN_PROJECT=true
-        ```
+     ```(sh)
+     export PIPENV_VENV_IN_PROJECT=true
+     ```
 
-    - Windows
+   - Windows
 
-        ```(sh)
-        set PIPENV_VENV_IN_PROJECT=true
-        ```
+     ```(sh)
+     set PIPENV_VENV_IN_PROJECT=true
+     ```
 
 1. `pip install pipenv`
 1. `git clone git@github.com:yukkun007/mmbooks.git`
@@ -76,7 +76,7 @@ pip install --upgrade . (もしくは-U)
 
 ### install package (編集可能モード)
 
-ソース編集の都度upgradeが不要になる。
+ソース編集の都度 upgrade が不要になる。
 
 ```(sh)
 pip install -e .
@@ -109,7 +109,7 @@ pipenv run ut
 pipenv run lint
 ```
 
-### create api document (sphix)
+### create api document (sphinx)
 
 ```(sh)
 pipenv run doc
@@ -117,27 +117,27 @@ pipenv run doc
 
 ### ソースコード配布物の作成
 
-dist/ 以下にmmbooks-0.0.1.tar.gzが生成される。
+dist/ 以下に mmbooks-0.0.1.tar.gz が生成される。
 
 ```(sh)
 python setup.py sdist
 ```
 
-### ソースコード配布物からpipでインストール
+### ソースコード配布物から pip でインストール
 
 ```(sh)
 pip install mmbooks-0.0.1-tar.gz
 ```
 
-### ビルド済み配布物(wheel形式)の作成
+### ビルド済み配布物(wheel 形式)の作成
 
-dist/ 以下にmmbooks-0.0.1-py3-none-any.whlが生成される。
+dist/ 以下に mmbooks-0.0.1-py3-none-any.whl が生成される。
 
 ```(sh)
 python setup.py bdist_wheel (wheelパッケージが必要)
 ```
 
-### ビルド済み配布物(wheel形式)からpipでインストール
+### ビルド済み配布物(wheel 形式)から pip でインストール
 
 ```(sh)
 pip install mmbooks-0.0.1-py3-none-any.whl
