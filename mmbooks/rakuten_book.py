@@ -9,14 +9,19 @@ class RakutenBook(Book):
         self.isbn = response_json.get("isbn", "")
         self.caption = response_json.get("itemCaption", "")
         self.price = response_json.get("itemPrice", "")
-        self.url = response_json.get("itemUrl", "")
         self.image_url = response_json.get("largeImageUrl", "")
-        self.sales_date = response_json.get("salesDate", "")
-        # print(self)
+        self.info_url = response_json.get("itemUrl", "")
+        self.publisher = response_json.get("publisherName", "")
+        self.published_date = response_json.get("salesDate", "")
 
     def to_list_string(self) -> str:
         string = "{},{},{},{},{},{}".format(
-            self.__class__.__name__, self.isbn, self.title, self.author, self.price, self.sales_date
+            self.__class__.__name__,
+            self.isbn,
+            self.title,
+            self.author,
+            self.price,
+            self.published_date,
         )
         return string
 
@@ -28,8 +33,9 @@ class RakutenBook(Book):
         isbn :      {}
         caption :   {}
         price :     {}
-        url :       {}
         image_url:  {}
+        info_url:   {}
+        publisher:  {}
         sales_date: {}
         """.format(
             self.__class__.__name__,
@@ -38,8 +44,9 @@ class RakutenBook(Book):
             self.isbn,
             self.caption,
             str(self.price),
-            self.url,
             self.image_url,
-            self.sales_date,
+            self.info_url,
+            self.publisher,
+            self.published_date,
         )
         return string

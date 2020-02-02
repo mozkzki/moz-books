@@ -28,10 +28,9 @@ class GoogleBook(Book):
                 self.isbn = ""
         self.description = volume_info.get("description", "")
         self.page_count = volume_info.get("pageCount", "")
-        self.thumbnail_url = volume_info.get("imageLinks", {"thumbnail": ""}).get("thumbnail", "")
+        self.image_url = volume_info.get("imageLinks", {"thumbnail": ""}).get("thumbnail", "")
+        self.info_url = volume_info.get("infoLink", "")
         self.published_date = volume_info.get("publishedDate", "")
-        # self.price = response_json.get("itemPrice", "")
-        # print(self)
 
     def to_list_string(self) -> str:
         string = "{},{},{},{},{},{}".format(
@@ -53,7 +52,8 @@ class GoogleBook(Book):
         isbn :          {}
         description :   {}
         page_count :    {}
-        thumbnail_url : {}
+        image_url :     {}
+        info_url :      {}
         published_date: {}
         """.format(
             self.__class__.__name__,
@@ -63,7 +63,8 @@ class GoogleBook(Book):
             self.isbn,
             self.description,
             self.page_count,
-            self.thumbnail_url,
+            self.image_url,
+            self.info_url,
             self.published_date,
         )
         return string

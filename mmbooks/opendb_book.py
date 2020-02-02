@@ -10,8 +10,8 @@ class OpenDBBook(Book):
         self.author = summary.get("author", "")
         self.isbn = summary.get("isbn", "")
         self.publisher = summary.get("publisher", "")
-        self.cover = summary.get("cover", "")
-        self.pubdate = summary.get("pubdate", "")
+        self.image_url = summary.get("cover", "")
+        self.published_date = summary.get("pubdate", "")
         # self.price = response_json.get("itemPrice", "")
         # print(self)
 
@@ -22,7 +22,7 @@ class OpenDBBook(Book):
             self.title,
             self.author,
             self.publisher,
-            self.pubdate,
+            self.published_date,
         )
         return string
 
@@ -41,7 +41,7 @@ class OpenDBBook(Book):
             self.author,
             self.isbn,
             self.publisher,
-            self.cover,
-            self.pubdate,
+            self.image_url,
+            self.published_date,
         )
         return string

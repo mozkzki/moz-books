@@ -1,5 +1,5 @@
 import argparse
-from .core import search_by_isbn, search, search_price
+from .core import search_by_isbn, search, search_all
 from mmbooks.rakuten import Rakuten
 from mmbooks.google import Google
 from mmbooks.opendb import OpenDB
@@ -13,11 +13,6 @@ def main():
     """
     )
 
-    # 必須の引数
-    # parser.add_argument("arg1", help="この引数の説明（なくてもよい）")
-    # parser.add_argument("arg2", help="foooo")
-
-    # オプション引数（指定しなくても良い引数）を追加
     parser.add_argument("-t", "--title", help="検索する本のタイトル")
     parser.add_argument("-a", "--author", help="検索する本の著者名")
     parser.add_argument("-i", "--isbn", help="検索する本のISBN")
@@ -29,10 +24,7 @@ def main():
         choices=["rakuten", "google", "opendb", "calil"],
     )
 
-    # よく使う引数なら省略形があると使う時に便利
-    # parser.add_argument("-a", "--arg4")
-
-    parser.add_argument("-p", "--price", help="価格を網羅的に調査する場合に指定", action="store_true")
+    parser.add_argument("-A", "--all", help="ISBN指定で全サービス横断検索する", action="store_true")
 
     args = parser.parse_args()
 
@@ -48,9 +40,9 @@ def main():
         service = Rakuten()
 
     if args.isbn is not None and args.isbn is not "":
-        if args.price:
-            books = search_price(args.isbn)
-            print(books)
+        if args.all:
+            book_info = search_all(args.isbn)
+            print(book_info)
             return
         book = search_by_isbn(args.isbn, service=service)
         print(book)

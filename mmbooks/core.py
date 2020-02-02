@@ -1,18 +1,30 @@
 from typing import Optional
 from mmbooks.book_search_query import BookSearchQuery
 from mmbooks.service import Service
+from mmbooks.google import Google
+from mmbooks.opendb import OpenDB
 from mmbooks.rakuten import Rakuten
+from mmbooks.calil import Calil
 from mmbooks.book import Book
 from mmbooks.books import Books
+from mmbooks.book_info import BookInfo
 
 
-def search_price(isbn: str) -> Books:
-    books: Books = Books({})
+def search_all(isbn: str) -> Book:
+    book_info: BookInfo = BookInfo()
+
+    book_google = search_by_isbn(isbn, service=Google())
+    book_info.set_google_book(book_google)
+    book_opendb = search_by_isbn(isbn, service=OpenDB())
+    book_info.set_opendb_book(book_opendb)
     book_rakuten = search_by_isbn(isbn, service=Rakuten())
+    book_info.set_rakuten_book(book_rakuten)
+    book_calil = search_by_isbn(isbn, service=Calil())
+    book_info.set_calil_book(book_calil)
+
     # book_yahoo = search_by_isbn(isbn, service=Yahoo())
-    if book_rakuten is not None:
-        books.list.append(book_rakuten)
-    return books
+
+    return book_info
 
 
 def search_by_isbn(isbn: str, service: Service = Rakuten()) -> Optional[Book]:
