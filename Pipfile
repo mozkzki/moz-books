@@ -11,7 +11,7 @@ flake8 = "==3.9.2"
 mypy = "==0.812"
 pytest = "==6.2.4"
 black = "==21.5b2"
-pytest-cov = "==2.12.0"
+pytest-cov = "==2.12.1"
 sphinx = "*"
 
 [requires]
