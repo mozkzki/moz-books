@@ -1,5 +1,9 @@
 # moz-books
 
+[![CircleCI](https://circleci.com/gh/mozkzki/moz-books/tree/master.svg?style=svg)](https://circleci.com/gh/mozkzki/moz-books/tree/master)
+[![codecov](https://codecov.io/gh/mozkzki/moz-books/branch/master/graph/badge.svg?token=BRB5vsPkO2)](https://codecov.io/gh/mozkzki/moz-books)
+[![Maintainability](https://api.codeclimate.com/v1/badges/df50bbce59225073a577/maintainability)](https://codeclimate.com/github/mozkzki/moz-books/maintainability)
+
 書籍関連APIの呼び出しを行う自前ライブラリ。
 
 ## Function
