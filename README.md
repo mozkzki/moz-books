@@ -1,159 +1,153 @@
-# mmbooks
+# moz-books
 
-## 必要な環境変数
+書籍関連APIの呼び出しを行う自前ライブラリ。
 
-```(sh)
-calil_app_key=<please specify calil application key>
-rakuten_app_id=<please specify rakuten application id>
+## Function
+
+- `service.search_books()`
+
+```python
+    params = SearchParams(isbn="9784052046209")
+    books = service.search_books(params)
 ```
 
-## インストール
+- 対応サービス
+  - Google Books API
+  - Rakuten Books API
+  - OpenDB
+  - Calil
 
-```(sh)
-pip install git+https://github.com/yukkun007/mmbooks
+## Usage
+
+Environmental variables
+
+`.env`ファイルに書いてproject rootに配置。`.env_sample`をコピーすると楽。
+
+```txt
+calil_app_key=12345...
+rakuten_app_id=12345...
 ```
 
-## アップグレード
+Install
 
-```(sh)
-pip install --upgrade git+https://github.com/yukkun007/mmbooks
+```sh
+pip install git+https://github.com/mozkzki/moz-books
+# upgrade
+pip install --upgrade git+https://github.com/mozkzki/moz-books
+# uninstall
+pip uninstall moz-books
 ```
 
-## 使い方 (モジュールを利用)
+Coding
 
-```(sh)
-python
->>> import mmbooks
->>> books = mmbooks.search(title="test")
->>> print(books)
+**ISBNで検索**
+
+```python
+import os
+from moz_books import Calil, Google, OpenDB, Rakuten, SearchParams
+
+params = SearchParams(isbn="9784052046209")
+services  = [Rakuten(), Google(), OpenDB(), Calil()]
+for service in services:
+    books = service.search_books(params)
+    for book in books:
+        print(book)
 ```
 
-## 使い方 (コマンドラインアプリを実行)
+**タイトル・著者で検索**
 
-```(sh)
-mmbooks
+※ OpenDBとCalilはISBN検索のみ対応なので注意
+
+```python
+import os
+from moz_books import Calil, Google, OpenDB, Rakuten, SearchParams
+
+params = SearchParams(title="5秒後に意外な", author="桃戸ハル")
+services  = [Rakuten(), Google()]
+for service in services:
+    books = service.search_books(params)
+    for book in books:
+        print(book)
 ```
 
-## アンインストール
+## Develop
 
-```(sh)
-pip uninstall mmbooks
+base project: [mozkzki/moz-sample](https://github.com/mozkzki/moz-sample)
+
+### Prepare
+
+```sh
+poetry install
+poetry shell
 ```
 
-## 開発フロー
+### Run (Example)
 
-### 環境構築
+```sh
+python ./examples/all.py
+# or
+make start
 
-1. 環境変数追加 (project ディレクトリに仮想環境作成)
-
-   - Linux
-
-     ```(sh)
-     export PIPENV_VENV_IN_PROJECT=true
-     ```
-
-   - Windows
-
-     ```(sh)
-     set PIPENV_VENV_IN_PROJECT=true
-     ```
-
-1. `pip install pipenv`
-1. `git clone git@github.com:yukkun007/mmbooks.git`
-1. `pipenv install --dev`
-
-### install package
-
-```(sh)
-pip install .
+# 各サービスを個別実行
+make google
+make rakuten
+make opendb
+make calil
 ```
 
-### upgrade package
+### Unit Test
 
-```(sh)
-pip install --upgrade . (もしくは-U)
+test all.
+
+```sh
+pytest
+pytest -v # verbose
+pytest -s # show standard output (same --capture=no)
+pytest -ra # show summary (exclude passed test)
+pytest -rA # show summary (include passed test)
 ```
 
-### install package (編集可能モード)
+with filter.
 
-ソース編集の都度 upgrade が不要になる。
-
-```(sh)
-pip install -e .
+```sh
+pytest -k app
+pytest -k test_app.py
+pytest -k my
 ```
 
-### モジュールを利用
+specified marker.
 
-```(sh)
-python
->>> import mmbooks
->>> books = mmbooks.search(title="test")
->>> print(books)
+```sh
+pytest -m 'slow'
+pytest -m 'not slow'
 ```
 
-### コマンドラインアプリを実行
+make coverage report.
 
-```(sh)
-pipenv run start (もしくはmmbooks)
+```sh
+pytest -v --capture=no --cov-config .coveragerc --cov=src --cov-report=xml --cov-report=term-missing .
+# or
+make ut
 ```
 
-### unit test
+### Lint
 
-```(sh)
-pipenv run ut
+```sh
+flake8 --max-line-length=100 --ignore=E203,W503 ./src ./tests
+# or
+make lint
 ```
 
-### lint
+### Create API Document (Sphinx)
 
-```(sh)
-pipenv run lint
+```sh
+make doc
 ```
 
-### create api document (sphinx)
+### Update dependency modules
 
-```(sh)
-pipenv run doc
-```
+dependabot (GitHub公式) がプルリクを挙げてくるので確認してマージする。
 
-### ソースコード配布物の作成
-
-dist/ 以下に mmbooks-0.0.1.tar.gz が生成される。
-
-```(sh)
-python setup.py sdist
-```
-
-### ソースコード配布物から pip でインストール
-
-```(sh)
-pip install mmbooks-0.0.1-tar.gz
-```
-
-### ビルド済み配布物(wheel 形式)の作成
-
-dist/ 以下に mmbooks-0.0.1-py3-none-any.whl が生成される。
-
-```(sh)
-python setup.py bdist_wheel (wheelパッケージが必要)
-```
-
-### ビルド済み配布物(wheel 形式)から pip でインストール
-
-```(sh)
-pip install mmbooks-0.0.1-py3-none-any.whl
-```
-
-## 参考
-
-### パッケージング/開発環境
-
-- <https://techblog.asahi-net.co.jp/entry/2018/06/15/162951>
-- <https://techblog.asahi-net.co.jp/entry/2018/11/19/103455>
-
-### コマンドライン引数のパース
-
-- <https://qiita.com/kzkadc/items/e4fc7bc9c003de1eb6d0>
-
-### 環境変数の定義
-
-- <https://pod.hatenablog.com/entry/2019/04/29/164109>
+- 最低でもCircleCIが通っているかは確認
+- CircleCIでは、最新の依存モジュールでtestするため`poetry update`してからtestしている
+- dependabotは`pyproject.toml`と`poetry.lock`を更新してくれる
