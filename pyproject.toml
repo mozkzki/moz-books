@@ -27,7 +27,7 @@ requests = "2.25.1"
 coloredlogs = "^15.0.1"
 
 [tool.poetry.dev-dependencies]
-flake8 = "3.9.2"
+flake8 = "4.0.1"
 mypy = "0.910"
 pytest = "6.2.5"
 black = "21.9b0"
