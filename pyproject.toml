@@ -24,7 +24,7 @@ classifiers=[
 [tool.poetry.dependencies]
 python = "^3.8"
 python-dotenv = "0.21.1"
-requests = "2.29.0"
+requests = "2.30.0"
 coloredlogs = "15.0.1"
 
 [tool.poetry.dev-dependencies]
